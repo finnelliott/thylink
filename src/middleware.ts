@@ -9,6 +9,9 @@ export const config = {
 
 function getSubdomain(req: NextRequest) {
   const hostname = req.headers.get("host"); // e.g. app.localhost:3000
+  if (hostname == process.env.VERCEL_URL) {
+    return null
+  }
   const subdomain = hostname?.includes(".") ? hostname?.split(".")[0] : null; // e.g. app
   return subdomain;
 }

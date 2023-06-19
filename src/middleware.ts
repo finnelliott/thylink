@@ -34,6 +34,11 @@ function rewrites(req: NextRequest) {
     return NextResponse.rewrite(new URL(`/app${pathname}`, req.url));
   }
 
+  // If the user is on the root domain, serve the root folder
+  if (subdomain === "www") {
+    return NextResponse.next();
+  }
+
   // If the user is on another subdomain, serve the _sites folder
   if (subdomain !== null) {
     return NextResponse.rewrite(new URL(`/sites/${subdomain}${pathname}`, req.url));

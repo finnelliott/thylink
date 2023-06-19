@@ -51,7 +51,7 @@ export default authMiddleware({
     const subdomain = getSubdomain(req);
     const { protocol, host, pathname, search } = req.nextUrl;
     if (!auth.userId && subdomain == "app") {
-      return redirectToSignIn({ returnBackUrl: `${protocol}app.${host}${pathname}${search}` });
+      return redirectToSignIn({ returnBackUrl: `${protocol}app.${host.replace("app.", "")}${pathname}${search}` });
     } else {
       return NextResponse.next();
     }

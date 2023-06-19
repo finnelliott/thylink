@@ -26,7 +26,7 @@ function rewrites(req: NextRequest) {
   // Redirect site requests from edit site page in app
   if (pathname.startsWith("/sites")) {
     const slug = pathname.split("sites/")[1]
-    return NextResponse.redirect(new URL(req.nextUrl.protocol + slug + "." + req.nextUrl.host))
+    return NextResponse.redirect(new URL(req.nextUrl.protocol + slug + "." + req.nextUrl.host.replace("app.", "")))
   }
 
   // If the user is on the app subdomain, serve the app subfolder

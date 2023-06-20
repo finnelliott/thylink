@@ -11,20 +11,21 @@ datasource db {
 }
 
 model User {
-  id               String                   @id @default(auto()) @map("_id") @db.ObjectId
-  clerk_id         String                   @unique
-  links            Link[]
-  username         String                   @unique
-  bio              String?
-  name             String
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  clerk_id String  @unique
+  links    Link[]
+  username String  @unique
+  bio      String?
+  name     String
+  domain   String? @unique
 }
 
 model Link {
-  id               String          @id @default(auto()) @map("_id") @db.ObjectId
-  user             User            @relation(fields: [user_id], references: [id])
-  user_id          String          @db.ObjectId
-  createdAt        DateTime        @default(now()) @map("created_at")
-  updatedAt        DateTime        @updatedAt @map("updated_at")
-  title            String
-  url              String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [user_id], references: [id])
+  user_id   String   @db.ObjectId
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  title     String
+  url       String
 }

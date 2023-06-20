@@ -1,5 +1,6 @@
 import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/../../prisma/prismadb";
 
 export const config = {
   matcher: [
@@ -13,7 +14,14 @@ function getSubdomain(req: NextRequest) {
   return subdomain;
 }
 
-function rewrites(req: NextRequest) {
+function isCustomDomain(req: NextRequest) {
+  const hostname = req.headers.get("host") ?? req.nextUrl.host; // e.g. links.finnelliott.com
+  const isStandardDomain = hostname.includes(`localhost:3000` || `thyl.ink`)
+  return !isStandardDomain;
+}
+
+
+async function rewrites(req: NextRequest) {
   const { nextUrl: url } = req;
   const pathname = url.pathname; // e.g. /about
   const subdomain = getSubdomain(req); // e.g. app
@@ -21,6 +29,15 @@ function rewrites(req: NextRequest) {
   // If request is for the api, serve the api folder
   if (pathname.startsWith("/api")) {
     return NextResponse.rewrite(new URL(`${pathname}`, req.url));
+  }
+
+  if (isCustomDomain(req)) {
+    const user = await prisma.user.findUnique({
+      where: {
+        domain: req.nextUrl.host
+      }
+    })
+    return NextResponse.rewrite(new URL(`/sites/${user?.username}${pathname}`, req.url));
   }
 
   // Redirect site requests from edit site page in app

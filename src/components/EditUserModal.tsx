@@ -118,7 +118,7 @@ export default function EditUserModal({ open, setOpen, user }: { open: boolean, 
                 </div>}
 
                 {!loading && error == '' && <form onSubmit={handleSubmit}>
-                    <div className="space-y-1.5 mb-4">
+                    <div className="space-y-1.5 pt-4 mb-4">
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                         <input required={true} value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" id="name" className="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm" />
                     </div>

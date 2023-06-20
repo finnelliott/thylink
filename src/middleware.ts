@@ -9,13 +9,16 @@ export const config = {
 
 function getSubdomain(req: NextRequest) {
   const hostname = req.headers.get("host") ?? req.nextUrl.host; // e.g. app.localhost:3000
-  const subdomain = hostname?.includes(".") ? hostname?.split(".")[0] : null; // e.g. app
+  const subdomain = hostname.replace("http://", "").replace("https://", "").replace("localhost:3000", "").replace("thyl.ink", "").replace(".", ""); // e.g. app
+  if (subdomain == "") {
+    return null;
+  }
   return subdomain;
 }
 
 function isCustomDomain(req: NextRequest) {
   const hostname = req.headers.get("host") ?? req.nextUrl.host; // e.g. links.finnelliott.com
-  const isStandardDomain = hostname.includes(`localhost:3000` || `thyl.ink`)
+  const isStandardDomain = hostname.includes(`localhost:3000`) || hostname.includes(`thyl.ink`);
   return !isStandardDomain;
 }
 

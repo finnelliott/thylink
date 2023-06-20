@@ -31,7 +31,8 @@ async function rewrites(req: NextRequest) {
   }
 
   if (isCustomDomain(req)) {
-    const slug = await fetch(`/api/username-for-custom-domain?url=${req.nextUrl.host}`).then(res => res.text())
+    const { protocol, host, pathname, search } = req.nextUrl;
+    const slug = await fetch(`${protocol}${host}/api/username-for-custom-domain?url=${host}`).then(res => res.text())
     return NextResponse.rewrite(new URL(`/sites/${slug}${pathname}`, req.url));
   }
 

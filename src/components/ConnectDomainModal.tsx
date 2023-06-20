@@ -31,7 +31,7 @@ export default function ConnectDomainModal({ open, setOpen, user }: { open: bool
   async function getDomains() {
     
     if (user.domain) {
-      const res = await fetch(`/api/domains/check?domain=${user.domain}`).then(res => res.json())
+      const res = await fetch(`/api/domains/check?domain=${encodeURIComponent(user.domain)}`).then(res => res.json())
       if (res.error) {
         setError(res.error.message)
       }

@@ -1,6 +1,5 @@
 import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/../../prisma/prismadb";
 
 export const config = {
   matcher: [
@@ -32,12 +31,8 @@ async function rewrites(req: NextRequest) {
   }
 
   if (isCustomDomain(req)) {
-    const user = await prisma.user.findUnique({
-      where: {
-        domain: req.nextUrl.host
-      }
-    })
-    return NextResponse.rewrite(new URL(`/sites/${user?.username}${pathname}`, req.url));
+    const slug = await fetch(`/api/username-for-custom-domain?url=${req.nextUrl.host}`).then(res => res.text())
+    return NextResponse.rewrite(new URL(`/sites/${slug}${pathname}`, req.url));
   }
 
   // Redirect site requests from edit site page in app

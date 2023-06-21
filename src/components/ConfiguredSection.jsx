@@ -25,7 +25,8 @@ const ConfiguredSection = ({ domainInfo }) => {
     )
     return (
       <>
-        <div className="flex items-center space-x-3 my-3">
+        <div className="w-full border-t border-gray-100 mt-4" />
+        <div className="flex items-center space-x-3 my-3 py-2">
           <svg
             viewBox="0 0 24 24"
             width="24"
@@ -43,8 +44,6 @@ const ConfiguredSection = ({ domainInfo }) => {
             Domain is pending verification
           </p>
         </div>
-
-        <div className="w-full border-t border-gray-100 mt-5 mb-8" />
 
         <div className="">
           <div className="flex justify-start space-x-4">
@@ -64,7 +63,7 @@ const ConfiguredSection = ({ domainInfo }) => {
               Please set the following TXT record on {domainInfo.apexName} to
               prove ownership of {domainInfo.name}:
             </p>
-            <div className="flex justify-start items-start space-x-10 bg-gray-50 p-2 rounded-md">
+            <div className="flex flex-col justify-start items-start space-y-4 bg-gray-50 p-2 rounded-md">
               <div>
                 <p className="text-sm font-bold">Type</p>
                 <p className="text-sm font-mono mt-2">{txtVerification.type}</p>
@@ -100,7 +99,8 @@ const ConfiguredSection = ({ domainInfo }) => {
 
   return (
     <>
-      <div className="flex items-center space-x-3 my-3 pt-2">
+      <div className="w-full border-t border-gray-100 mt-4" />
+      <div className="flex items-center space-x-3 my-3 py-2">
         <svg
           viewBox="0 0 24 24"
           width="24"
@@ -141,10 +141,8 @@ const ConfiguredSection = ({ domainInfo }) => {
           {domainInfo.configured ? 'Valid' : 'Invalid'} Configuration
         </p>
       </div>
-
       {!domainInfo.configured && (
         <>
-          <div className="w-full border-t border-gray-100 mt-5 mb-8" />
 
           <div className="">
             <div className="flex justify-start space-x-4">
@@ -181,7 +179,7 @@ const ConfiguredSection = ({ domainInfo }) => {
                 <div>
                   <p className="text-sm font-bold">Name</p>
                   <p className="text-sm font-mono mt-2">
-                    {recordType == 'CNAME' ? 'www' : '@'}
+                    {recordType == 'CNAME' ? domainInfo.name.replace("."+domainInfo.apexName, "") : '@'}
                   </p>
                 </div>
                 <div>

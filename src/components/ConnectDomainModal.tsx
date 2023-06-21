@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { ArrowPathIcon, ClockIcon, GlobeAltIcon, UserCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { ArrowPathIcon, ArrowTopRightOnSquareIcon, ClockIcon, GlobeAltIcon, UserCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { User } from '@prisma/client'
 import ConfiguredSection from './ConfiguredSection';
 
@@ -18,25 +18,28 @@ export default function ConnectDomainModal({ open, setOpen, user }: { open: bool
   const [ domainInfo, setDomainInfo ] = useState<string | undefined>()
   const [ verified, setVerified ] = useState<boolean>(false)
 
+  async function checkDomain() {
+    const res = await fetch(`/api/domains/check`).then(res => res.json())
+    if (res.error) {
+      setError(res.error.message)
+    }
+    setDomainInfo(res)
+  }
+
+  async function getDomains() {
+    if (user.domain) {
+      checkDomain()
+    }
+  }
+
   async function revalidateDomain() {
     setRefreshing(true)
-    getDomains()
+    await checkDomain()
     const res = await fetch(`/api/users`, {
       method: "GET"
     }).then(res => res.json())
     setTempUser(res)
     setRefreshing(false)
-  }
-
-  async function getDomains() {
-    
-    if (user.domain) {
-      const res = await fetch(`/api/domains/check`).then(res => res.json())
-      if (res.error) {
-        setError(res.error.message)
-      }
-      setDomainInfo(res)
-    }
   }
 
   async function handleRemoveDomain() {
@@ -68,6 +71,10 @@ export default function ConnectDomainModal({ open, setOpen, user }: { open: bool
       const data = await res.json()
       if (res.status == 409) {
         setError(`Cannot add ${domain} since it's already assigned to another project.`)
+        setLoading(false)
+      }
+      if (res.status == 400) {
+        setError(data.error.message)
         setLoading(false)
       }
       if (res.status == 200) {
@@ -161,7 +168,7 @@ export default function ConnectDomainModal({ open, setOpen, user }: { open: bool
 
                 {!loading && error == '' && tempUser.domain && <div className='mt-4 shadow-inner rounded-md bg-gray-50 p-4 flex flex-col'>
                   <div className="flex justify-between items-center">
-                  <p className="text-base text-gray-600">{tempUser.domain}</p>
+                  <a href={"https://"+tempUser.domain} target="_blank" rel="noopener noreferer" className='text-gray-600 hover:text-gray-800'><p className="text-base font-medium flex items-center">{tempUser.domain}<ArrowTopRightOnSquareIcon className="ml-3 w-5 h-5" /></p></a>
                   <div className="flex space-x-2">
                     <button onClick={() => revalidateDomain()} className="rounded bg-gray-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">{refreshing ? "...": "Refresh"}</button>
                     <button onClick={() => handleRemoveDomain()} className="rounded bg-red-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">{removing ? "..." : "Remove"}</button>

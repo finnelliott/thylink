@@ -126,7 +126,7 @@ export default function EditUserModal({ open, setOpen, user }: { open: boolean, 
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
                         <div className="w-full relative">
                             <input required={true} value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="username" id="username" className="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm pr-48" />
-                            <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 sm:text-sm">.domain.com</span>
+                            <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 sm:text-sm">.thyl.ink</span>
                         </div>
                     </div>
                     <div className="space-y-1.5 mb-6">

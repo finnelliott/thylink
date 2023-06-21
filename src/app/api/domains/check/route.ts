@@ -1,12 +1,21 @@
+import { currentUser } from "@clerk/nextjs"
 import { NextRequest } from "next/server"
+import prisma from "@/../../prisma/prismadb"
 
 export async function GET(request: NextRequest) {
-    const domain = request.nextUrl.searchParams.get('domain') || undefined;
-    if (!domain) {
-        return new Response("Please provide domain as search query parameter", {
-            status: 404
-        })
+    const clerkUser = await currentUser()
+    if (!clerkUser) {
+      return new Response("Unauthorized", { status: 401 })
     }
+    const user = await prisma.user.findUnique({
+      where: {
+        clerk_id: clerkUser.id
+      }
+    })
+    if (!user) {
+      return new Response("Unauthorized", { status: 401 })
+    }
+    const domain = user.domain
   
     const [configResponse, domainResponse] = await Promise.all([
       fetch(

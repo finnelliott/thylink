@@ -1,5 +1,7 @@
 import Image from "next/image";
 import logo from "@/../../public/thylink-logo-black.png"
+import Link from "next/link";
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 
 export default function Home () {
     return (
@@ -17,6 +19,7 @@ export default function Home () {
             </ul>
 
             <p>Waste not another moment, good sirs and ladies! Embark on thy journey to a more organized and efficient online presence with Thy Link.</p>
+            <Link href="/app" className="flex items-center">Begin Thy Journey<ArrowLongRightIcon className="w-5 h-5 ml-3" /></Link>
         </main>
     )
 }

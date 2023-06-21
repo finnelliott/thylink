@@ -45,6 +45,12 @@ async function rewrites(req: NextRequest) {
     return NextResponse.redirect(new URL(req.nextUrl.protocol + slug + "." + req.nextUrl.host.replace("app.", "")))
   }
 
+  // Redirect site requests from edit site page in app
+  if (pathname.startsWith("/app")) {
+    const slug = pathname.split("sites/")[1]
+    return NextResponse.redirect(new URL(req.nextUrl.protocol + "app." + req.nextUrl.host.replace("app.", "").replace("www.", "")))
+  }
+
   // If the user is on the app subdomain, serve the app subfolder
   if (subdomain === "app") {
     return NextResponse.rewrite(new URL(`/app${pathname}`, req.url));

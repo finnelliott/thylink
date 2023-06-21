@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Thy Link
+
+Thy Link is a user-friendly and customisable alternative to Linktree, designed to help you consolidate all your online links into a single, easy-to-navigate page. With Thy Link, you can create a unified platform for your social media profiles, blogs, and other online presences, making it simple for your followers to find and engage with your content.
+
+## Features
+
+- **Assemble all your links**: Easily bring together all your online profiles and links in one organised location.
+- **Use custom domains**: Establish your presence with a domain that is truly your own, for a more professional and memorable experience.
+- **Customise your page**: Personalise your page with colours, images, and fonts that reflect your unique style and personality. (Coming Soon)
+- **Analyse your performance**: Gain insights into the number of visitors and clicks on your links, so you can better understand your audience and their interests. (Coming Soon)
 
 ## Getting Started
 
-First, run the development server:
+To begin using Thy Link, follow these simple steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. **Sign up**: Create a free account on the [Thy Link website](https://www.thyl.ink).
+2. **Add your links**: Input the URLs for your various online profiles, blogs, and other links.
+3. **Setup a custom domain**: Keep you brand at the forefront by attaching a custom domain to your page.
+4. **Share your Thy Link**: Share Thy Link with your followers on social media, email, and other platforms.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Example
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To see Thy Link in action, visit this [example Thy Link page](https://links.finnelliott.com).
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+## Contributing
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+We are not currently accepting contributions to Thy Link. However, if you have any suggestions or feedback, please feel free to [contact us](mailto:finn@finnelliott.com).

@@ -20,9 +20,9 @@ export default function Home () {
 
             <p>Waste not another moment, good sirs and ladies! Embark on thy journey to a more organised and efficient online presence with Thy Link. <strong>Behold an <a href="https://links.finnelliott.com">example Thy Link page</a></strong> to witness the splendor and utility of this marvelous creation.</p>
             <Link href="/app" className="flex items-center">Begin Thy Journey<ArrowLongRightIcon className="w-5 h-5 ml-3" /></Link>
-            <blockquote>
-            <p>Good sirs and ladies, prithee, turneth thine attention to the very foundation of this wondrous creation. <strong>Inspecteth the <a href="https://github.com/finnelliott/thylink">codebase</a></strong> and marvel at the craftsmanship that bringeth Thy Link to life.</p>
-            </blockquote>
+            <br/>
+            <br/>
+            <p><strong>P.S.</strong> Good sirs and ladies, prithee, turneth thine attention to the very foundation of this wondrous creation. <strong>Inspecteth the <a href="https://github.com/finnelliott/thylink">codebase</a></strong> and marvel at the craftsmanship that bringeth Thy Link to life.</p>
         </main>
     )
 }
